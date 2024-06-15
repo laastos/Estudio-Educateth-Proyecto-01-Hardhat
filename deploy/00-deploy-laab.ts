@@ -11,7 +11,11 @@ const deployLAAB: DeployFunction = async function (
   const { deploy, log } = deployments;
   const { deployer } = await getNamedAccounts();
 
-  const args: any[] = [];
+  const initialSupply = hre.ethers.parseUnits("1000000", 18);
+
+  const args: any[] = [
+    initialSupply, // _initialSupply
+  ];
 
   log("------------------------------------");
   log("Deploying LAAB \n");
