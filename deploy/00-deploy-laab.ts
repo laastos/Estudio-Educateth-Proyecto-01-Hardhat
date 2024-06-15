@@ -25,13 +25,16 @@ const deployLAAB: DeployFunction = async function (
     waitConfirmations: networkConfig[network.name].blockConfirmations || 1,
   });
 
-  log("------------------------------------");
-  log("Verifying LAAB \n");
+  // Verify Contract on Etherscan
+  if (network.name === "arbitrumSepolia") {
+    log("------------------------------------");
+    log("Verifying LAAB \n");
 
-  await run("verify:verify", {
-    address: laab.address,
-    constructorArguments: args,
-  });
+    await run("verify:verify", {
+      address: laab.address,
+      constructorArguments: args,
+    });
+  }
 
   if (!developmentChains.includes(network.name)) {
     await verify(laab.address, args);

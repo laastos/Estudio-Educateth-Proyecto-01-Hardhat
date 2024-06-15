@@ -37,7 +37,7 @@ const SOLC_SETTINGS = {
   },
 };
 
-const defaultNetwork: string = "localhost";
+const defaultNetwork: string = "hardhat";
 
 const config: HardhatUserConfig = {
   defaultNetwork,
