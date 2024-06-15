@@ -9,8 +9,9 @@ contract LAAB is ERC20 {
 
     event mintToken(address indexed to, uint256 value);
 
-    constructor() ERC20("LAAB", "LAAB") {
-        _mint(msg.sender, 10000000 * 10 * decimals());
+    constructor(uint256 _initialSupply) ERC20("LAAB", "LAAB") {
+        _mint(msg.sender, _initialSupply);
+        balances[msg.sender] += _initialSupply;
     }
 
     /**
@@ -28,6 +29,7 @@ contract LAAB is ERC20 {
      */
     function mint(address _to, uint256 _value) public returns (bool) {
         _mint(_to, _value);
+        balances[_to] += _value;
 
         emit mintToken(_to, _value);
 
@@ -40,8 +42,8 @@ contract LAAB is ERC20 {
      * @param _value The amount to be transferred
      */
     function transfer(address _to, uint256 _value) public override returns (bool) {
-        require(0 == _value, "Invalid value");
-        require(balances[msg.sender] >= _value, "Insufficient balance");
+        require(0 < _value, "ERC20: invalid amount to transfer");
+        require(balances[msg.sender] >= _value, "ERC20: transfer amount exceeds balance");
         balances[msg.sender] -= _value;
         balances[_to] += _value;
         emit Transfer(msg.sender, _to, _value);

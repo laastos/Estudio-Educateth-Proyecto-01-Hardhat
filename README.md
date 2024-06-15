@@ -54,4 +54,20 @@ yarn add @openzeppelin/contracts
 touch contracts/LAAB.sol
 
 # 3. Deployment
-touch scripts/deploy.js
+
+## 3.1. Iniciar Hardhat Network
+yarn chain
+
+## 3.2. Crear script para el deploy
+touch deploy/00-deploy-laab.ts
+
+# 4. Test
+
+# 4.1. Crear test
+touch test/LAAB.ts
+
+# 4.2. Correr test
+yarn test
+
+
+
