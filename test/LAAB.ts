@@ -11,7 +11,6 @@ describe("LAAB Token", function () {
     const token = await Token.deploy(initialSupply);
 
     const ownerBalance = await token.balanceOf(owner.address);
-    log("Owner Balance" + ownerBalance);
     expect(await token.totalSupply()).to.equal(ownerBalance);
   });
 
